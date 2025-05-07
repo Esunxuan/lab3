@@ -61,7 +61,7 @@ def handle_client(client_socket):
 
 def print_stats():
     global tuple_space, operation_count, put_count, read_count, get_count, error_count, client_count
-     while True:
+    while True:
         time.sleep(10)
         tuple_count = len(tuple_space)
         total_tuple_size = sum(len(key) + len(value) for key, value in tuple_space.items())
@@ -79,3 +79,13 @@ def print_stats():
             avg_value_size = total_value_size / tuple_count
         else:
             avg_value_size = 0
+        print(f"Tuple count: {tuple_count}")
+        print(f"Average tuple size: {avg_tuple_size}")
+        print(f"Average key size: {avg_key_size}")
+        print(f"Average value size: {avg_value_size}")
+        print(f"Connected clients: {client_count}")
+        print(f"Total operations: {operation_count}")
+        print(f"PUT operations: {put_count}")
+        print(f"READ operations: {read_count}")
+        print(f"GET operations: {get_count}")
+        print(f"Error count: {error_count}")
