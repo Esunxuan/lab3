@@ -89,3 +89,18 @@ def print_stats():
         print(f"READ operations: {read_count}")
         print(f"GET operations: {get_count}")
         print(f"Error count: {error_count}")
+
+def start_server(port):
+    global client_count
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind(('0.0.0.0', port))
+    server_socket.listen(5)
+    print(f"Server listening on port {port}")
+    stats_thread = threading.Thread(target=print_stats)
+    stats_thread.daemon = True
+    stats_thread.start()
+    while True:
+        client_socket, addr = server_socket.accept()
+        client_count += 1
+        client_thread = threading.Thread(target=handle_client, args=(client_socket,))
+        client_thread.start()
