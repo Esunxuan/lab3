@@ -58,3 +58,6 @@ def handle_client(client_socket):
         print(f"Error handling client: {e}")
     finally:
         client_socket.close()
+
+def print_stats():
+    global tuple_space, operation_count, put_count, read_count, get_count, error_count, client_count
